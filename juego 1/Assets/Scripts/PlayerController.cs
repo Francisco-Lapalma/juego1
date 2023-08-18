@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerJumpSpeed = 3f;
     Rigidbody2D rb2D;
 
+
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -25,17 +27,22 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             rb2D.velocity = new Vector2(playerSpeed, rb2D.velocity.y);
         }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.A))
         {
             rb2D.velocity = new Vector2(-playerSpeed, rb2D.velocity.y);
         }
         else
         {
             rb2D.velocity = new Vector2(0, rb2D.velocity.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && PlayerCollisions.isGrounded == true)
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, playerJumpSpeed);
         }
     }
 }

@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static bool isGrounded;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        isGrounded = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        isGrounded = false;
+    }
+
+    private void Update()
+    {
+        if (isGrounded == true)
+        {
+            Debug.Log("Player is grounded");
+        }
+        else
+        {
+            Debug.Log("Player is not grounded");
+        }
     }
 }
